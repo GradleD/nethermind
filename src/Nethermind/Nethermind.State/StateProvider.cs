@@ -594,7 +594,6 @@ namespace Nethermind.State
                     count++;
                     _tree.Set(pair.Key, pair.Value);
                 }
-                _logger.Info($"State Write: {count} values, skipped {skipped} (unchanged)");
                 Metrics.StateTreeWrites += count;
             }
         }

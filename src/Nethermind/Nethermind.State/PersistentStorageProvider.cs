@@ -261,7 +261,6 @@ namespace Nethermind.State
                 Interlocked.Add(ref totalCount, count);
             });
 
-            _logger.Info($"Storage Write: {totalCount} values");
             Db.Metrics.StorageTreeWrites += totalCount;
 
             // Is overhead of parallel foreach worth it?
