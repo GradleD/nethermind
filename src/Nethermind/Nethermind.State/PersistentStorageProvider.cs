@@ -549,7 +549,16 @@ namespace Nethermind.State
             }
 
             public bool TryGetValue(TKey key, out TValue value)
-                => _dictionary.TryGetValue(key, out value);
+            {
+                bool exists = _dictionary.TryGetValue(key, out value);
+                if (!exists && _selfDestruct)
+                {
+                    value = destructedValue;
+                    exists = true;
+                }
+
+                return exists;
+            }
 
             public TValue? this[TKey key]
             {
