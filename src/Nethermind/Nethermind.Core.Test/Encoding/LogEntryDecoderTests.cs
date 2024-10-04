@@ -22,10 +22,10 @@ namespace Nethermind.Core.Test.Encoding
             Rlp rlp = Rlp.Encode(logEntry);
             LogEntry decoded = valueDecode ? Rlp.Decode<LogEntry>(rlp.Bytes.AsSpan()) : Rlp.Decode<LogEntry>(rlp);
 
-            Assert.That(decoded.Data, Is.EqualTo(logEntry.Data), "data");
-            Assert.That(decoded.LoggersAddress, Is.EqualTo(logEntry.LoggersAddress), "address");
-            Assert.That(decoded.Topics, Is.EqualTo(logEntry.Topics), "topics");
-        }
+        Assert.That(decoded.Data, Is.EqualTo(logEntry.Data), "data");
+        Assert.That(decoded.Address, Is.EqualTo(logEntry.Address), "address");
+        Assert.That(decoded.Topics, Is.EqualTo(logEntry.Topics), "topics");
+    }
 
         [Test]
         public void Can_do_roundtrip_ref_struct()
@@ -35,8 +35,8 @@ namespace Nethermind.Core.Test.Encoding
             Rlp.ValueDecoderContext valueDecoderContext = new(rlp.Bytes);
             LogEntryDecoder.DecodeStructRef(ref valueDecoderContext, RlpBehaviors.None, out LogEntryStructRef decoded);
 
-            Assert.That(Bytes.AreEqual(logEntry.Data, decoded.Data), "data");
-            Assert.That(logEntry.LoggersAddress == decoded.LoggersAddress, "address");
+        Assert.That(Bytes.AreEqual(logEntry.Data, decoded.Data), "data");
+        Assert.That(logEntry.Address == decoded.Address, "address");
 
             Span<byte> buffer = stackalloc byte[32];
             KeccaksIterator iterator = new(decoded.TopicsRlp, buffer);
@@ -64,10 +64,10 @@ namespace Nethermind.Core.Test.Encoding
             Rlp encoded = decoder.Encode(logEntry);
             LogEntry deserialized = decoder.Decode(new RlpStream(encoded.Bytes))!;
 
-            Assert.That(deserialized.Data, Is.EqualTo(logEntry.Data), "data");
-            Assert.That(deserialized.LoggersAddress, Is.EqualTo(logEntry.LoggersAddress), "address");
-            Assert.That(deserialized.Topics, Is.EqualTo(logEntry.Topics), "topics");
-        }
+        Assert.That(deserialized.Data, Is.EqualTo(logEntry.Data), "data");
+        Assert.That(deserialized.Address, Is.EqualTo(logEntry.Address), "address");
+        Assert.That(deserialized.Topics, Is.EqualTo(logEntry.Topics), "topics");
+    }
 
         [Test]
         public void Rlp_stream_and_standard_have_same_results()
