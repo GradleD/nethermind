@@ -39,7 +39,7 @@ namespace Nethermind.Db
             _logger = logManager?.GetClassLogger() ?? throw new ArgumentNullException(nameof(logManager));
             ArgumentNullException.ThrowIfNull(dbDirectoryPath);
             Name = name ?? throw new ArgumentNullException(nameof(name));
-            DbPath = Path.Combine(dbDirectoryPath, DbFileName);
+            DbPath = Path.Combine(dbDirectoryPath, $"{Name}.db");
             Description = $"{Name}|{DbPath}";
 
             if (!Directory.Exists(dbDirectoryPath))
