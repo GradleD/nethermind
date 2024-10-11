@@ -28,7 +28,7 @@ on:
 jobs:
   publish-docker:
     name: Publish to Docker Hub
-    runs-on: [ubuntu-arm64-4-core]
+    runs-on: [ubuntu-arm64-4core]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
