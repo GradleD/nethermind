@@ -28,7 +28,7 @@ on:
 jobs:
   publish-docker:
     name: Publish to Docker Hub
-    runs-on: [ubuntu-latest-16-core]
+    runs-on: [ubuntu-latest-16-cores]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
 
   publish-docker2:
     name: Publish to Docker Hub
-    runs-on: [ubuntu-arm64-8-core]
+    runs-on: [ubuntu-arm64-8-cores]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
