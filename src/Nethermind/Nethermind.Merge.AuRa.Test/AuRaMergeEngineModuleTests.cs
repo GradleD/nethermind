@@ -45,7 +45,7 @@ public class AuRaMergeEngineModuleTests : EngineModuleTests
         IMergeConfig? mergeConfig = null,
         IPayloadPreparationService? mockedPayloadService = null,
         ILogManager? logManager = null)
-        => new MergeAuRaTestBlockchain(mergeConfig, mockedPayloadService);
+        => new MergeAuRaTestBlockchain(mergeConfig, mockedPayloadService, null);
 
     protected override Hash256 ExpectedBlockHash => new("0x990d377b67dbffee4a60db6f189ae479ffb406e8abea16af55e0469b8524cf46");
 
@@ -94,7 +94,7 @@ public class AuRaMergeEngineModuleTests : EngineModuleTests
         private AuRaNethermindApi? _api;
         protected ITxSource? _additionalTxSource;
 
-        public MergeAuRaTestBlockchain(IMergeConfig? mergeConfig = null, IPayloadPreparationService? mockedPayloadPreparationService = null)
+        public MergeAuRaTestBlockchain(IMergeConfig? mergeConfig = null, IPayloadPreparationService? mockedPayloadPreparationService = null, ITxSource? additionalTxSource = null)
             : base(mergeConfig, mockedPayloadPreparationService)
         {
             SealEngineType = Core.SealEngineType.AuRa;
