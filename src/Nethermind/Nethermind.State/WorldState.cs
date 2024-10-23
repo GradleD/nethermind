@@ -54,17 +54,17 @@ namespace Nethermind.State
             StateTree? stateTree = null,
             IStorageTreeFactory? storageTreeFactory = null,
             PreBlockCaches? preBlockCaches = null,
-            bool populatePreBlockCache = true)
+            bool populatePreBlockCache = true, bool detailedLogs = false)
         {
             PreBlockCaches = preBlockCaches;
             _trieStore = trieStore;
             _stateProvider = new StateProvider(trieStore.GetTrieStore(null), codeDb, logManager, stateTree, PreBlockCaches?.StateCache, populatePreBlockCache);
-            _persistentStorageProvider = new PersistentStorageProvider(trieStore, _stateProvider, logManager, storageTreeFactory, PreBlockCaches?.StorageCache, populatePreBlockCache);
+            _persistentStorageProvider = new PersistentStorageProvider(trieStore, _stateProvider, logManager, storageTreeFactory, PreBlockCaches?.StorageCache, populatePreBlockCache, detailedLogs: detailedLogs);
             _transientStorageProvider = new TransientStorageProvider(logManager);
         }
 
-        public WorldState(ITrieStore trieStore, IKeyValueStore? codeDb, ILogManager? logManager, PreBlockCaches? preBlockCaches, bool populatePreBlockCache = true)
-            : this(trieStore, codeDb, logManager, null, preBlockCaches: preBlockCaches, populatePreBlockCache: populatePreBlockCache)
+        public WorldState(ITrieStore trieStore, IKeyValueStore? codeDb, ILogManager? logManager, PreBlockCaches? preBlockCaches, bool populatePreBlockCache = true, bool detailedLogs = false)
+            : this(trieStore, codeDb, logManager, null, preBlockCaches: preBlockCaches, populatePreBlockCache: populatePreBlockCache, detailedLogs:detailedLogs)
         {
         }
 

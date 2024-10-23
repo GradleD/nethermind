@@ -30,6 +30,7 @@ namespace Nethermind.Trie
         private readonly ILogger _logger;
 
         public const int OneNodeAvgMemoryEstimate = 384;
+        protected bool _detailedLogs = false;
 
         /// <summary>
         ///     0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421
@@ -372,6 +373,17 @@ namespace Nethermind.Trie
         {
             try
             {
+                if (_detailedLogs)
+                {
+                    Console.WriteLine($"GettingNode {rawKey.ToHexString()} {rootHash ?? RootHash}");
+                }
+            }catch (Exception e)
+            {
+                Console.WriteLine($"GOOT Exceptiokn: {e}");
+            }
+
+            try
+            {
                 int nibblesCount = 2 * rawKey.Length;
                 byte[]? array = null;
                 Span<byte> nibbles = (rawKey.Length <= MaxKeyStackAlloc
@@ -396,6 +408,7 @@ namespace Nethermind.Trie
         [DebuggerStepThrough]
         public byte[]? GetNodeByPath(byte[] nibbles, Hash256? rootHash = null)
         {
+
             try
             {
                 TreePath updatePathTreePath = TreePath.Empty; // Only used on update.
@@ -413,6 +426,17 @@ namespace Nethermind.Trie
         [DebuggerStepThrough]
         public byte[]? GetNodeByKey(Span<byte> rawKey, Hash256? rootHash = null)
         {
+            try
+            {
+                if (_detailedLogs)
+                {
+                    Console.WriteLine($"GettingNode {rawKey.ToHexString()} {rootHash ?? RootHash}");
+                }
+            }catch (Exception e)
+            {
+                Console.WriteLine($"GOOT Exceptiokn: {e}");
+            }
+
             byte[] array = null;
             try
             {

@@ -33,6 +33,7 @@ namespace Nethermind.State
         internal readonly IStorageTreeFactory _storageTreeFactory;
         private readonly Dictionary<AddressAsKey, StorageTree> _storages = new();
         private readonly HashSet<AddressAsKey> _toUpdateRoots = new();
+        private bool _detailedLogs = false;
 
         /// <summary>
         /// EIP-1283
@@ -53,8 +54,9 @@ namespace Nethermind.State
             ILogManager logManager,
             IStorageTreeFactory? storageTreeFactory,
             ConcurrentDictionary<StorageCell, byte[]>? preBlockCache,
-            bool populatePreBlockCache) : base(logManager)
+            bool populatePreBlockCache, bool detailedLogs = false) : base(logManager)
         {
+            _detailedLogs = detailedLogs;
             _trieStore = trieStore ?? throw new ArgumentNullException(nameof(trieStore));
             _stateProvider = stateProvider ?? throw new ArgumentNullException(nameof(stateProvider));
             _logManager = logManager ?? throw new ArgumentNullException(nameof(logManager));
@@ -475,7 +477,7 @@ namespace Nethermind.State
 
         private class StorageTreeFactory : IStorageTreeFactory
         {
-            public StorageTree Create(Address address, IScopedTrieStore trieStore, Hash256 storageRoot, Hash256 stateRoot, ILogManager? logManager)
+            public StorageTree Create(Address address, IScopedTrieStore trieStore, Hash256 storageRoot, Hash256 stateRoot, ILogManager? logManager, bool detailedLogs = false)
                 => new(trieStore, storageRoot, logManager);
         }
 

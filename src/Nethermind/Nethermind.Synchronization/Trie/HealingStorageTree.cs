@@ -19,9 +19,10 @@ public class HealingStorageTree : StorageTree
     private readonly Hash256 _stateRoot;
     private readonly ITrieNodeRecovery<GetTrieNodesRequest>? _recovery;
 
-    public HealingStorageTree(IScopedTrieStore? trieStore, Hash256 rootHash, ILogManager? logManager, Address address, Hash256 stateRoot, ITrieNodeRecovery<GetTrieNodesRequest>? recovery)
+    public HealingStorageTree(IScopedTrieStore? trieStore, Hash256 rootHash, ILogManager? logManager, Address address, Hash256 stateRoot, ITrieNodeRecovery<GetTrieNodesRequest>? recovery, bool detailedLogs = false)
         : base(trieStore, rootHash, logManager)
     {
+        _detailedLogs = detailedLogs;
         _address = address;
         _stateRoot = stateRoot;
         _recovery = recovery;

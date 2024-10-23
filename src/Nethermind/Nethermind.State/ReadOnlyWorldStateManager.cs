@@ -50,7 +50,7 @@ public class ReadOnlyWorldStateManager : IWorldStateManager
             : new WorldState(
                 _readOnlyTrieStore,
                 _codeDb,
-                _logManager);
+                _logManager, detailedLogs: true);
     }
 
     public virtual event EventHandler<ReorgBoundaryReached>? ReorgBoundaryReached
