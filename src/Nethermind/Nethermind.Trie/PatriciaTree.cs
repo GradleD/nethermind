@@ -46,6 +46,7 @@ namespace Nethermind.Trie
 
         private readonly ConcurrentQueue<NodeCommitInfo>? _currentCommit;
 
+        private bool _detailedLogs = false;
         public ITrieStore TrieStore { get; }
         public ICappedArrayPool? _bufferPool;
 
@@ -113,8 +114,10 @@ namespace Nethermind.Trie
             bool parallelBranches,
             bool allowCommits,
             ILogManager? logManager,
-            ICappedArrayPool? bufferPool = null)
+            ICappedArrayPool? bufferPool = null,
+            bool detailedLogs = false)
         {
+            _detailedLogs = detailedLogs;
             _logger = logManager?.GetClassLogger<PatriciaTree>() ?? throw new ArgumentNullException(nameof(logManager));
             TrieStore = trieStore ?? throw new ArgumentNullException(nameof(trieStore));
             _parallelBranches = parallelBranches;
@@ -311,6 +314,10 @@ namespace Nethermind.Trie
         [DebuggerStepThrough]
         public virtual byte[]? Get(ReadOnlySpan<byte> rawKey, Hash256? rootHash = null)
         {
+            if (_detailedLogs)
+            {
+                _logger.Info($"NodesAccessed: {rawKey.ToHexString()} {rootHash ?? RootHash}");
+            }
             try
             {
                 int nibblesCount = 2 * rawKey.Length;

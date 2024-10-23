@@ -40,8 +40,8 @@ namespace Nethermind.State
             TrieType = TrieType.Storage;
         }
 
-        public StorageTree(ITrieStore? trieStore, Hash256 rootHash, ILogManager? logManager)
-            : base(trieStore, rootHash, false, true, logManager)
+        public StorageTree(ITrieStore? trieStore, Hash256 rootHash, ILogManager? logManager, bool detailedLogs = false)
+            : base(trieStore, rootHash, false, true, logManager, detailedLogs:detailedLogs)
         {
             TrieType = TrieType.Storage;
         }

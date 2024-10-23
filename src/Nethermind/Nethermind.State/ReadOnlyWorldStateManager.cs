@@ -41,7 +41,7 @@ public class ReadOnlyWorldStateManager : IWorldStateManager
 
     public IWorldState CreateResettableWorldState()
     {
-        return new WorldState(_readOnlyTrieStore, _codeDb, _logManager);
+        return new WorldState(_readOnlyTrieStore, _codeDb, _logManager, detailedLogs: true);
     }
 
     public virtual event EventHandler<ReorgBoundaryReached>? ReorgBoundaryReached
