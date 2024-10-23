@@ -477,8 +477,9 @@ namespace Nethermind.State
 
         private class StorageTreeFactory : IStorageTreeFactory
         {
-            public StorageTree Create(Address address, IScopedTrieStore trieStore, Hash256 storageRoot, Hash256 stateRoot, ILogManager? logManager, bool detailedLogs = false)
-                => new(trieStore, storageRoot, logManager);
+            public StorageTree Create(Address address, IScopedTrieStore trieStore, Hash256 storageRoot,
+                Hash256 stateRoot, ILogManager? logManager, bool detailedLogs = false)
+                => new(trieStore, storageRoot, logManager, detailedLogs: detailedLogs);
         }
 
         private sealed class SelfDestructDictionary<TValue>(TValue destructedValue)
