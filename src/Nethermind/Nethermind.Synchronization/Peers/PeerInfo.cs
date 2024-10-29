@@ -65,7 +65,7 @@ namespace Nethermind.Synchronization.Peers
         [MethodImpl(MethodImplOptions.Synchronized)]
         public bool TryAllocate(AllocationContexts contexts)
         {
-            if (CanBeAllocated(contexts))
+            if (CanBeAllocated(contexts) && !AllocatedContexts.Equals(AllocationContexts.Snap))
             {
                 AllocatedContexts |= contexts;
                 return true;
