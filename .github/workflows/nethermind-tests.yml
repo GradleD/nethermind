@@ -7,7 +7,7 @@ concurrency:
 on:
   pull_request:
   push:
-    branches: [master]
+    branches: [test/before-scl]
   workflow_dispatch:
     inputs:
       coverage:
@@ -37,7 +37,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
       with:
-        ref: evm-refactor
+        ref: test/before-scl
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
     - name: Cache dotnet packages
