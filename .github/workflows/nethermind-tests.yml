@@ -37,7 +37,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
       with:
-        ref: release/1.28.0
+        ref: master
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
     - name: Cache dotnet packages
@@ -49,11 +49,30 @@ jobs:
     - name: ${{ matrix.project }}
       id: test
       run: |
-        while dotnet test src/Nethermind/${{ matrix.project }} -c release; do
-          echo "Test passed. Running again..."
-          sleep 1  # optional
+        first_run=true
+
+        while true; do
+            if $first_run; then
+                # Run the first test with build
+                if dotnet test src/Nethermind/Nethermind.Runner.Test -c release; then
+                    echo "Test passed. Running again..."
+                    first_run=false
+                else
+                    echo "Test failed on the first run. Exiting loop."
+                    break
+                fi
+                else
+                # Run subsequent tests without build
+                if dotnet test src/Nethermind/Nethermind.Runner.Test -c release --no-build; then
+                    echo "Test passed. Running again..."
+                else
+                    echo "Test failed. Exiting loop."
+                    break
+                fi
+            fi
+            sleep 1  # optional pause between runs
         done
-        echo "Test failed. Exiting loop."
+
     - name: Save test outcome
       if: success() || failure()
       run: echo "${{ steps.test.outcome == 'success' }}," >> nethermind.outcome
