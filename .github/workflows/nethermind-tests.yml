@@ -36,6 +36,8 @@ jobs:
     steps:
     - name: Check out repository
       uses: actions/checkout@v4
+      with:
+        ref: fix/snap-sync-edge-cases
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
     - name: Cache dotnet packages
