@@ -37,7 +37,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
       with:
-        ref: feature/rpc-state-override
+        ref: kch/adjust_to_verify_trie
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
     - name: Cache dotnet packages
