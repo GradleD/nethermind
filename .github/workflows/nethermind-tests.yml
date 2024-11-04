@@ -37,7 +37,7 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
       with:
-        ref: feature/allow-skipping-sender-recovery
+        ref: perf/faster-full-table-scan
     - name: Set up .NET
       uses: actions/setup-dotnet@v4
     - name: Cache dotnet packages
