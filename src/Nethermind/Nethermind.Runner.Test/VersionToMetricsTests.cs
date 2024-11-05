@@ -7,7 +7,6 @@ using NUnit.Framework;
 
 namespace Nethermind.Runner.Test;
 
-[Parallelizable(ParallelScope.Children)]
 [TestFixture]
 public class VersionToMetricsTests
 {

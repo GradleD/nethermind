@@ -27,7 +27,6 @@ using NUnit.Framework;
 
 namespace Nethermind.Runner.Test;
 
-[Parallelizable(ParallelScope.Children)]
 public class ConfigFilesTests : ConfigFileTestsBase
 {
     [TestCase("*")]

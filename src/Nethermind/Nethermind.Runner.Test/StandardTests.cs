@@ -7,7 +7,6 @@ using NUnit.Framework;
 namespace Nethermind.Runner.Test
 {
     [TestFixture]
-    [Parallelizable(ParallelScope.Children)]
     public class StandardTests
     {
         [Test]
