@@ -17,7 +17,7 @@ using NUnit.Framework;
 
 namespace Nethermind.Runner.Test.Ethereum.Steps
 {
-    [TestFixture, Parallelizable(ParallelScope.All)]
+    [TestFixture, Parallelizable(ParallelScope.Children)]
     public class EthereumStepsManagerTests
     {
         [Test]

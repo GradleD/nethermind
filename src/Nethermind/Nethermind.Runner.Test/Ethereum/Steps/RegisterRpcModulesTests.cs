@@ -15,7 +15,7 @@ using NUnit.Framework;
 
 namespace Nethermind.Runner.Test.Ethereum.Steps
 {
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable(ParallelScope.Children)]
     [TestFixture]
     public class RegisterRpcModulesTests
     {

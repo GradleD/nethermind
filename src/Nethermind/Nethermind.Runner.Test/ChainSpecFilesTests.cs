@@ -10,7 +10,7 @@ using Nethermind.Serialization.Json;
 
 namespace Nethermind.Runner.Test
 {
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable(ParallelScope.Children)]
     [TestFixture]
     public class ChainSpecFilesTests
     {
