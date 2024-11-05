@@ -7,7 +7,7 @@ concurrency:
 on:
   pull_request:
   push:
-    branches: [kch/test-runner-in-loop]
+    branches: [kch/test-runner-in-loop, test/after-scl]
   workflow_dispatch:
     inputs:
       coverage:
