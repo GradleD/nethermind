@@ -164,6 +164,11 @@ namespace Nethermind.Synchronization.SnapSync
                 var builder = new StringBuilder();
                 builder.AppendLine("TRIESYNC: AddStorageRange");
                 builder.AppendLine($"TRIESYNC: {request}");
+
+                foreach (var acc in request.Accounts)
+                {
+                    builder.AppendLine($"TRIESYNC: PathWithAccount: {acc.Path}");
+                }
                 foreach (IOwnedReadOnlyList<PathWithStorageSlot>? acc in response.PathsAndSlots)
                 {
                     foreach (PathWithStorageSlot item in acc)
